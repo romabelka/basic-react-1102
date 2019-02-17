@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Comment from './comment'
+import ToggleComponent from './toggle-component'
 
-class CommentsList extends Component {
+class CommentsList extends ToggleComponent {
   render() {
     const { collection } = this.props
+    const { isOpen } = this.state
 
     const commentItems = collection.map((comment) => (
       <li key={comment.id}>
@@ -14,7 +16,8 @@ class CommentsList extends Component {
     return (
       <div style={{ marginTop: '20px' }}>
         <h2>Comments: </h2>
-        <ul>{commentItems}</ul>
+        <button onClick={this.toggle()}>{this.toggleButtonLabel()}</button>
+        {isOpen ? <ul>{commentItems}</ul> : null}
       </div>
     )
   }
