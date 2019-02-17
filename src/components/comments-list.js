@@ -1,23 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Comment from './comment'
 
-class CommentsList extends Component {
-  render() {
-    const { collection } = this.props
+import useToggle from '../custom-hooks/toggle'
 
-    const commentItems = collection.map((comment) => (
-      <li key={comment.id}>
-        <Comment model={comment} />
-      </li>
-    ))
+function CommentsList({ collection }) {
+  const { isOpen, toggle } = useToggle()
 
-    return (
-      <div style={{ marginTop: '20px' }}>
-        <h2>Comments: </h2>
-        <ul>{commentItems}</ul>
-      </div>
-    )
-  }
+  const commentItems = collection.map((comment) => (
+    <li key={comment.id}>
+      <Comment model={comment} />
+    </li>
+  ))
+
+  return (
+    <div style={{ marginTop: '20px' }}>
+      <h2>Comments: </h2>
+      <button onClick={toggle}>{isOpen ? 'Close' : 'Show'}</button>
+      {isOpen ? <ul>{commentItems}</ul> : null}
+    </div>
+  )
 }
 
 export default CommentsList
