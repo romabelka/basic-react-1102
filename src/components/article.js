@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 
 class Article extends Component {
+  getBody() {
+    let style = { display: 'block' }
+    const { isOpen, article } = this.props
+    if (!isOpen) {
+      style = { display: 'none' }
+    }
+    return (
+      <div style={style}>
+        <section>{article.text}</section>
+        <div>{this.props.children}</div>
+      </div>
+    )
+  }
+
   render() {
     const { article, onBtnClick, isOpen } = this.props
     const btnText = isOpen ? 'close' : 'open'
@@ -12,12 +26,6 @@ class Article extends Component {
         {this.getBody()}
       </div>
     )
-  }
-
-  getBody() {
-    const { isOpen, article } = this.props
-    if (!isOpen) return null
-    return <section>{article.text}</section>
   }
 }
 
