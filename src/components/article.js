@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
 
 class Article extends Component {
+  getBody() {
+    const { isOpen, article } = this.props
+    if (!isOpen) {
+      return null
+    }
+    return (
+      <div>
+        <section>{article.text}</section>
+        <div>{this.props.children}</div>
+      </div>
+    )
+  }
+
   render() {
     const { article, onBtnClick, isOpen } = this.props
     const btnText = isOpen ? 'close' : 'open'
@@ -12,12 +25,6 @@ class Article extends Component {
         {this.getBody()}
       </div>
     )
-  }
-
-  getBody() {
-    const { isOpen, article } = this.props
-    if (!isOpen) return null
-    return <section>{article.text}</section>
   }
 }
 
