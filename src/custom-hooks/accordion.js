@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 export default () => {
-  const [openItemId, setOpenItemId] = useState(null)
-  const toggleOpenItem = (id) => () => setOpenItemId(id)
+  const [openItem, setOpenItem] = useState(null)
+  const toggleOpenItem = () => () => setOpenItem(!openItem)
 
-  return { openItemId, toggleOpenItem }
+  return { openItem, toggleOpenItem }
 }
