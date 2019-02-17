@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CommentList from './comments-list'
 
 class Article extends Component {
   render() {
@@ -17,7 +18,13 @@ class Article extends Component {
   getBody() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
-    return <section>{article.text}</section>
+    return (
+      <div>
+        <section>{article.text}</section>
+        <h3>Comments:</h3>
+        <CommentList comments={article.comments} />
+      </div>
+    )
   }
 }
 

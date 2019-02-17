@@ -30,14 +30,18 @@ export default class ExtendedDayPicker extends Component {
     const st_dt =
       this.state.start_date && new Date(this.state.start_date).toISOString().slice(0, 10)
     const en_dt = this.state.end_date && new Date(this.state.end_date).toISOString().slice(0, 10)
-    return st_dt + ' - ' + en_dt
+    return st_dt && en_dt ? st_dt + ' - ' + en_dt : ''
   }
 
   render() {
     return (
       <div>
-        <input value={this.getFormatedPeriod()} readOnly />
-        <DayPicker onDayClick={this.handleDayClick} />
+        <div>
+          <input value={this.getFormatedPeriod()} readOnly />
+        </div>
+        <div>
+          <DayPicker onDayClick={this.handleDayClick} />
+        </div>
       </div>
     )
   }
