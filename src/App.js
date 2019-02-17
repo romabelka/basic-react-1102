@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
 import ArticleList from './components/article-list'
+import UserDate from './components/user-date'
 import UserForm from './components/user-form'
 import articles from './fixtures'
 
@@ -25,6 +26,9 @@ class App extends Component {
       <div>
         <h1>Article App</h1>
         <UserForm onStateChange={this.getUserState} />
+
+        <UserDate />
+
         <Select options={options} value={this.state.selected} onChange={this.handleChange} />
         <ArticleList articles={articles} />
       </div>
