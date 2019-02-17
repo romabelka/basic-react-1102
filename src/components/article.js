@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import CommentList from './comments-list'
 
 class Article extends Component {
+  state = {
+    commentsOpened: false
+  }
+
   render() {
     const { article, onBtnClick, isOpen } = this.props
     const btnText = isOpen ? 'close' : 'open'
@@ -14,10 +19,24 @@ class Article extends Component {
     )
   }
 
+  onBtnCommentsClick = () => {
+    this.setState({ commentsOpened: !this.state.commentsOpened })
+  }
+
   getBody() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
-    return <section>{article.text}</section>
+    const commentsButtonCaption = this.state.commentsOpened ? 'Collaps' : 'Expand'
+    return (
+      <div>
+        <section>{article.text}</section>
+        <h3>
+          Comments:
+          <button onClick={this.onBtnCommentsClick}>{commentsButtonCaption}</button>
+        </h3>
+        <CommentList comments={article.comments} isOpened={this.state.commentsOpened} />
+      </div>
+    )
   }
 }
 
