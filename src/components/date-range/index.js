@@ -41,11 +41,7 @@ class DateRange extends Component {
   }
 
   renderDateString(date) {
-    if (!date) {
-      return ''
-    }
-
-    return date.toDateString()
+    return date ? date.toDateString() : ''
   }
 
   handleChangeDateStart(value) {

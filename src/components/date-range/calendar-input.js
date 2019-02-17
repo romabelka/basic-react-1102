@@ -5,7 +5,6 @@ import { formatDate, parseDate } from 'react-day-picker/moment'
 
 class CalendarInput extends Component {
   render() {
-    console.log(this.props.disabledDays)
     return (
       <DayPickerInput
         {...this.props}
