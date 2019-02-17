@@ -19,11 +19,11 @@ class Article extends Component {
     )
   }
 
-  getBody() {
-    function onBtnCommentsClick() {
-      this.setState({ commentsOpened: !this.state.commentsOpened })
-    }
+  onBtnCommentsClick = () => {
+    this.setState({ commentsOpened: !this.state.commentsOpened })
+  }
 
+  getBody() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
     const commentsButtonCaption = this.state.commentsOpened ? 'Collaps' : 'Expand'
@@ -32,7 +32,7 @@ class Article extends Component {
         <section>{article.text}</section>
         <h3>
           Comments:
-          <button onClick={onBtnCommentsClick.bind(this)}>{commentsButtonCaption}</button>
+          <button onClick={this.onBtnCommentsClick}>{commentsButtonCaption}</button>
         </h3>
         <CommentList comments={article.comments} isOpened={this.state.commentsOpened} />
       </div>
