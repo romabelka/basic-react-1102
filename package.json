@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "^16.8.1",
+    "react-day-picker": "^7.2.4",
     "react-dom": "^16.8.1",
+    "react-helmet": "^5.2.0",
     "react-scripts": "2.1.5",
     "react-select": "^2.3.0"
   },

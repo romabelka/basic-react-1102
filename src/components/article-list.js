@@ -1,6 +1,6 @@
 import React from 'react'
 import Article from './article'
-import useAccordion from '../custom-hooks/accordion'
+import useAccordion from '../custom-hooks/accordionId'
 
 export default function ArticleList({ articles }) {
   const { openItemId, toggleOpenItem } = useAccordion()
@@ -20,7 +20,7 @@ export default function ArticleList({ articles }) {
 
 //import AccodrionComponent from './accordion-component'
 /*
-import accordion from '../decorators/accordion'
+import accordionId from '../decorators/accordionId'
 
 function ArticleList({ articles, toggleOpenArticle, openArticleId }) {
     const articleItems = articles.map((article) => (
@@ -36,5 +36,5 @@ function ArticleList({ articles, toggleOpenArticle, openArticleId }) {
     return <ul>{articleItems}</ul>
 }
 
-export default accordion(ArticleList)
+export default accordionId(ArticleList)
 */
