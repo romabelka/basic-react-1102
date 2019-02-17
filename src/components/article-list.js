@@ -22,7 +22,7 @@ export default function ArticleList({ articles }) {
 /*
 import accordion from '../decorators/accordion'
 
-function ArticleList({ articles, toggleOpenArticle, openArticleId }) {
+function CommentList({ articles, toggleOpenArticle, openArticleId }) {
     const articleItems = articles.map((article) => (
       <li key={article.id}>
         <Article
@@ -36,5 +36,5 @@ function ArticleList({ articles, toggleOpenArticle, openArticleId }) {
     return <ul>{articleItems}</ul>
 }
 
-export default accordion(ArticleList)
+export default accordion(CommentList)
 */
