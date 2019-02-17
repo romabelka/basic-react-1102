@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Comment from './comment'
+import toggle from '../decorators/toggle'
 
 class CommentsList extends Component {
   render() {
-    const { collection } = this.props
+    const { collection, isOpen, onToggle } = this.props
 
     const commentItems = collection.map((comment) => (
       <li key={comment.id}>
@@ -14,10 +15,11 @@ class CommentsList extends Component {
     return (
       <div style={{ marginTop: '20px' }}>
         <h2>Comments: </h2>
-        <ul>{commentItems}</ul>
+        <button onClick={onToggle}>{isOpen ? 'Close' : 'Open'}</button>
+        {isOpen ? <ul>{commentItems}</ul> : null}
       </div>
     )
   }
 }
 
-export default CommentsList
+export default toggle(CommentsList)
