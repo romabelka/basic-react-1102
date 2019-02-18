@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+// import App from './App'
+import Calendar from './components/calendar'
+import './style/style.css'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Calendar />, document.getElementById('root'))
