@@ -1,32 +1,44 @@
 import React, { Component } from 'react'
-import Select from 'react-select'
-import ArticleList from './components/article-list'
-import UserForm from './components/user-form'
-import articles from './fixtures'
+// import Select from 'react-select'
+// import ArticleList from './components/article-list'
+// import UserForm from './components/user-form'
+// import articles from './fixtures'
+import DayPicker, { DateUtils } from 'react-day-picker'
+import 'react-day-picker/lib/style.css'
 
 class App extends Component {
   state = {
-    selected: null
+    from: '',
+    to: ''
   }
-
-  handleChange = (selected) => this.setState({ selected })
-
-  getUserState = (state) => {
-    console.log('---', state)
+  handleResetClick = () => {
+    this.setState({
+      from: '',
+      to: ''
+    })
   }
-
+  handleDayClick = (day) => {
+    const range = DateUtils.addDayToRange(day, this.state)
+    this.setState(range)
+  }
   render() {
-    const options = articles.map((article) => ({
-      label: article.title,
-      value: article.id
-    }))
-
+    const { from, to } = this.state
+    const modifiers = { start: from, end: to }
     return (
       <div>
-        <h1>Article App</h1>
-        <UserForm onStateChange={this.getUserState} />
-        <Select options={options} value={this.state.selected} onChange={this.handleChange} />
-        <ArticleList articles={articles} />
+        <h1>React Day Picker</h1>
+        <p>
+          {from && to ? (
+            <button onClick={this.handleResetClick}>Reset range</button>
+          ) : (
+            'You should to choose a range'
+          )}
+        </p>
+        <DayPicker
+          selectedDays={[from, { from, to }]}
+          modifiers={modifiers}
+          onDayClick={this.handleDayClick}
+        />
       </div>
     )
   }
