@@ -17,7 +17,22 @@ class Article extends Component {
   getBody() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
-    return <section>{article.text}</section>
+    return (
+      <div>
+        <section>{article.text}</section>
+        <div>
+          <h3>Comments:</h3>
+          <ul>
+            {article.comments.map((comment) => (
+              <li key={comment.id}>
+                <p>User name: {comment.user}</p>
+                <p>{comment.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
   }
 }
 
