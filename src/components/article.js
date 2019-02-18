@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CommponentsList from './comments'
 
 class Article extends Component {
   render() {
@@ -17,22 +18,7 @@ class Article extends Component {
   getBody() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
-    return (
-      <div>
-        <section>{article.text}</section>
-        <div>
-          <h3>Comments:</h3>
-          <ul>
-            {article.comments.map((comment) => (
-              <li key={comment.id}>
-                <p>User name: {comment.user}</p>
-                <p>{comment.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    )
+    return <CommponentsList article={article} />
   }
 }
 
