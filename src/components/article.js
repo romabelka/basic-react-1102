@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import CommponentsList from './comments'
+import ShowHOC from '../decorators/componentShowHOC'
+
+CommponentsList = ShowHOC(CommponentsList)
 
 class Article extends Component {
   render() {
