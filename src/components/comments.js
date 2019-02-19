@@ -4,7 +4,6 @@ import ShowHOC from '../decorators/componentShowHOC'
 class CommponentsList extends Component {
   render() {
     const { article, handleToggleShow, show } = this.props
-    console.log(this.props)
     return (
       <div>
         <section>{article.text}</section>
@@ -26,5 +25,4 @@ class CommponentsList extends Component {
     )
   }
 }
-
 export default ShowHOC(CommponentsList)
