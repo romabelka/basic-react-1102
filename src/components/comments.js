@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ShowHOC from '../decorators/componentShowHOC'
 
 class CommponentsList extends Component {
   render() {
@@ -8,7 +9,7 @@ class CommponentsList extends Component {
       <div>
         <section>{article.text}</section>
         <button onClick={handleToggleShow}>{show ? 'Hide comments' : 'Open comments'}</button>
-        {show && (
+        {show && article.comments && (
           <div>
             <h4>Comments:</h4>
             <ul>
@@ -26,4 +27,4 @@ class CommponentsList extends Component {
   }
 }
 
-export default CommponentsList
+export default ShowHOC(CommponentsList)
