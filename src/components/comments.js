@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 
 class CommponentsList extends Component {
+  state = {
+    show: false
+  }
+
+  handleToggleShow = () => {
+    this.setState({ show: !this.state.show })
+  }
   render() {
-    const { article, handleToggleShow, show } = this.props
+    const { article } = this.props
+    const { show } = this.state
     return (
       <div>
         <section>{article.text}</section>
-        <button onClick={handleToggleShow}>{show ? 'Hide comments' : 'Open comments'}</button>
+        <button onClick={this.handleToggleShow}>{show ? 'Hide comments' : 'Open comments'}</button>
         {show && (
           <div>
             <h4>Comments:</h4>
