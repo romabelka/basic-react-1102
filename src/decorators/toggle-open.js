@@ -6,12 +6,13 @@ export default (OriginalComponent) =>
       isOpen: false
     }
 
-    toggleOpen = () =>
+    toggleOpen = () => {
       this.setState((state) => ({
         isOpen: !state.isOpen
       }))
+    }
 
     render() {
-      return <OriginalComponent {...this.props} {...this.state} toggleOpen={this.toggleOpen} />
+      return <OriginalComponent {...this.state} {...this.props} toggleOpen={this.toggleOpen} />
     }
   }

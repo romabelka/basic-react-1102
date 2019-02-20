@@ -5,7 +5,11 @@ import CommentList from './comment-list'
 
 class Article extends Component {
   static propTypes = {
-    article: PropTypes.object,
+    article: PropTypes.shape({
+      title: PropTypes.string,
+      text: PropTypes.string,
+      comments: PropTypes.arrayOf(PropTypes.object)
+    }).isRequired,
     isOpen: PropTypes.bool,
     onBtnClick: PropTypes.func
   }
