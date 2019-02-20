@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
+import PropTypes from 'prop-types'
 
 class Article extends Component {
-  /*
-    componentDidCatch(error) {
-        console.log('---', error)
-    }
+  static propTypes = {
+    article: PropTypes.shape({
+      title: PropTypes.string,
+      text: PropTypes.string,
+      comments: PropTypes.array
+    }),
+    isOpen: PropTypes.bool,
+    onBtnClick: PropTypes.func
+  }
 
-*/
   render() {
     const { article, isOpen, onBtnClick } = this.props
     return (
@@ -34,11 +38,7 @@ class Article extends Component {
     )
   }
 
-  setCommentsRef = (ref) => {
-    //      window.comments = ref
-    //    console.log('---', 'comments', ref)
-    //    console.log('---', 'comments DOM', findDOMNode(ref))
-  }
+  setCommentsRef = (ref) => {}
 }
 
 export default Article
