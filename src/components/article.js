@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
+// import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
+import PropTypes from 'prop-types'
 
 class Article extends Component {
   /*
@@ -39,6 +40,19 @@ class Article extends Component {
     //    console.log('---', 'comments', ref)
     //    console.log('---', 'comments DOM', findDOMNode(ref))
   }
+}
+
+Article.propTypes = {
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+  }),
+  onBtnClick: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool
+}
+
+Article.defaultProps = {
+  isOpen: false
 }
 
 export default Article
