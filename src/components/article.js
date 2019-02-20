@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
+// import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
 
 class Article extends Component {
