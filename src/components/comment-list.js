@@ -10,11 +10,10 @@ class CommentList extends Component {
     toggleOpen: PropTypes.func
   }
 
-  /*
   static defaultProps = {
-    comments: []
+    comments: [],
+    isOpen: false
   }
-*/
 
   render() {
     const { isOpen, toggleOpen } = this.props

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 
 function SelectFilter({ articles }) {
@@ -10,6 +11,13 @@ function SelectFilter({ articles }) {
   }))
 
   return <Select options={options} value={selected} onChange={setSelection} isMulti />
+}
+
+SelectFilter.propTypes = {
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+  })
 }
 
 export default SelectFilter
