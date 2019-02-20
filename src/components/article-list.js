@@ -28,6 +28,10 @@ export default function ArticleList({ articles, fetchAll }) {
 //import AccodrionComponent from './accordion-component'
 
 class ArticleList extends Component {
+  static propTypes = {
+    articles: PropTypes.array.isRequired
+  }
+
   componentDidMount() {
     this.props.fetchAll && this.props.fetchAll()
   }
@@ -46,9 +50,6 @@ class ArticleList extends Component {
 
     return <ul className="test--article-list__container">{articleItems}</ul>
   }
-}
-ArticleList.propTypes = {
-  articles: PropTypes.array.isRequired
 }
 
 export default accordion(ArticleList)

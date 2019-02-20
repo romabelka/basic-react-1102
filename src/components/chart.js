@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Chart extends Component {
-  static propTypes = {}
+  static propTypes = {
+    articles: PropTypes.array.isRequired
+  }
 
   componentDidUpdate() {
     //compare props and update chart in this.container
