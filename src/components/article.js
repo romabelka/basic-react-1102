@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
 
 class Article extends Component {
+  static propTypes = {
+    article: PropTypes.object,
+    isOpen: PropTypes.bool,
+    onBtnClick: PropTypes.func
+  }
+
   /*
     componentDidCatch(error) {
         console.log('---', error)

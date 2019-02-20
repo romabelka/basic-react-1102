@@ -28,10 +28,6 @@ export default function ArticleList({ articles, fetchAll }) {
 //import AccodrionComponent from './accordion-component'
 
 class ArticleList extends Component {
-  componentDidMount() {
-    this.props.fetchAll && this.props.fetchAll()
-  }
-
   render() {
     const { articles, toggleOpenItem, openItemId } = this.props
     const articleItems = articles.map((article) => (
@@ -47,8 +43,11 @@ class ArticleList extends Component {
     return <ul className="test--article-list__container">{articleItems}</ul>
   }
 }
+
 ArticleList.propTypes = {
-  articles: PropTypes.array.isRequired
+  articles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  toggleOpenItem: PropTypes.func,
+  openItemId: PropTypes.string
 }
 
 export default accordion(ArticleList)
