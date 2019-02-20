@@ -17,8 +17,6 @@ class UserForm extends Component {
     this.setState({
       username: ev.target.value.length < 10 ? ev.target.value : ''
     })
-
-    this.props.onStateChange(this.state)
   }
 }
 

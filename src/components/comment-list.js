@@ -4,18 +4,6 @@ import Comment from './comment'
 import toggleOpen from '../decorators/toggle-open'
 
 class CommentList extends Component {
-  static propTypes = {
-    comments: PropTypes.array,
-    isOpen: PropTypes.bool,
-    toggleOpen: PropTypes.func
-  }
-
-  /*
-  static defaultProps = {
-    comments: []
-  }
-*/
-
   render() {
     const { isOpen, toggleOpen } = this.props
     const text = isOpen ? 'hide comments' : 'show comments'
@@ -50,11 +38,20 @@ class CommentList extends Component {
     this.list = ref
   }
 }
-/*
 
 CommentList.propTypes = {
-  comments: PropTypes.array
+  toggleOpen: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired
+    })
+  ),
+  isOpen: PropTypes.bool
 }
-*/
+
+CommentList.defaultProps = {
+  comments: [],
+  isOpen: false
+}
 
 export default toggleOpen(CommentList)
