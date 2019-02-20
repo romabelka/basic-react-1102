@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
+import CommentForm from './comment-form/comment-form'
 
 class Article extends Component {
   static propTypes = {
