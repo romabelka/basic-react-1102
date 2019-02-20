@@ -47,8 +47,12 @@ class ArticleList extends Component {
     return <ul className="test--article-list__container">{articleItems}</ul>
   }
 }
+
 ArticleList.propTypes = {
-  articles: PropTypes.array.isRequired
+  articles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  toggleOpenItem: PropTypes.func,
+  fetchAll: PropTypes.func,
+  openItemId: PropTypes.string
 }
 
 export default accordion(ArticleList)

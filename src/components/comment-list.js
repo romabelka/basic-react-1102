@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
 import toggleOpen from '../decorators/toggle-open'
+import CommentForm from './comment-form/comment-form'
 
 class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array,
+    comments: PropTypes.arrayOf(PropTypes.object),
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func
   }
@@ -21,7 +22,9 @@ class CommentList extends Component {
     const text = isOpen ? 'hide comments' : 'show comments'
     return (
       <div>
-        <button onClick={toggleOpen}>{text}</button>
+        <button className="test--toggle_comments__btn" onClick={toggleOpen}>
+          {text}
+        </button>
         {this.getBody()}
       </div>
     )
@@ -31,25 +34,32 @@ class CommentList extends Component {
     const { comments, isOpen } = this.props
     if (!isOpen) return null
 
-    const body = comments.length ? (
-      <ul ref={this.setListRef}>
-        {comments.map((comment) => (
-          <li key={comment.id}>
-            <Comment comment={comment} />
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <h3>No comments yet</h3>
-    )
+    const body =
+      comments && comments.length ? (
+        <ul ref={this.setListRef} className="test--comments_list">
+          {comments.map((comment) => (
+            <li key={comment.id} className="test--comments_item">
+              <Comment comment={comment} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <h3 className="test--comments_empty-label">No comments yet</h3>
+      )
 
-    return <div>{body}</div>
+    return (
+      <div>
+        {body}
+        <CommentForm />
+      </div>
+    )
   }
 
   setListRef = (ref) => {
     this.list = ref
   }
 }
+
 /*
 
 CommentList.propTypes = {

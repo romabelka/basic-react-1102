@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Comment from './comment'
 import useToggler from '../custom-hooks/toggle-open'
 
@@ -29,6 +30,11 @@ function getBody({ comments, isOpen }) {
   )
 
   return <div>{body}</div>
+}
+
+CommentList.propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.object),
+  isOpen: PropTypes.bool
 }
 
 export default CommentList

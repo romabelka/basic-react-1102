@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
+import CommentForm from './comment-form/comment-form'
 
 class Article extends Component {
+  static propTypes = {
+    article: PropTypes.shape({
+      title: PropTypes.string,
+      text: PropTypes.string,
+      comments: PropTypes.arrayOf(PropTypes.object)
+    }).isRequired,
+    isOpen: PropTypes.bool,
+    onBtnClick: PropTypes.func
+  }
+
   /*
     componentDidCatch(error) {
         console.log('---', error)
