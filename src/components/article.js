@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import CommentList from './comment-list'
+import { deleteArticle } from '../ac'
 
 class Article extends Component {
   render() {
@@ -10,9 +12,14 @@ class Article extends Component {
         <button onClick={onBtnClick} className="test__article--btn">
           {isOpen ? 'close' : 'open'}
         </button>
+        <button onClick={this.handleDeleteClick}>delete me</button>
         {this.getBody()}
       </div>
     )
+  }
+
+  handleDeleteClick = () => {
+    this.props.deleteArticle(this.props.article.id)
   }
 
   getBody() {
@@ -28,4 +35,7 @@ class Article extends Component {
   }
 }
 
-export default Article
+export default connect(
+  null,
+  { deleteArticle }
+)(Article)
