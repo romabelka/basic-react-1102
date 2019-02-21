@@ -4,7 +4,7 @@ import Comment from './comment'
 import toggleOpen from '../decorators/toggle-open'
 import CommentForm from './comment-form'
 
-class CommentList extends Component {
+export class CommentList extends Component {
   static propTypes = {
     comments: PropTypes.array,
     isOpen: PropTypes.bool,
