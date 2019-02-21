@@ -44,7 +44,7 @@ class ArticleList extends Component {
       </li>
     ))
 
-    return <ul className="test--article-list__container">{articleItems}</ul>
+    return <ul className="test__article-list--container">{articleItems}</ul>
   }
 }
 ArticleList.propTypes = {

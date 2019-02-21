@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
 import toggleOpen from '../decorators/toggle-open'
+import CommentForm from './comment-form'
 
 class CommentList extends Component {
   static propTypes = {
@@ -21,7 +22,9 @@ class CommentList extends Component {
     const text = isOpen ? 'hide comments' : 'show comments'
     return (
       <div>
-        <button onClick={toggleOpen}>{text}</button>
+        <button onClick={toggleOpen} className="test__comment-list--btn">
+          {text}
+        </button>
         {this.getBody()}
       </div>
     )
@@ -31,19 +34,25 @@ class CommentList extends Component {
     const { comments, isOpen } = this.props
     if (!isOpen) return null
 
-    const body = comments.length ? (
-      <ul ref={this.setListRef}>
-        {comments.map((comment) => (
-          <li key={comment.id}>
-            <Comment comment={comment} />
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <h3>No comments yet</h3>
-    )
+    const body =
+      comments && comments.length ? (
+        <ul ref={this.setListRef}>
+          {comments.map((comment) => (
+            <li key={comment.id} className="test__comment-list--item">
+              <Comment comment={comment} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <h3 className="test__comment-list--empty">No comments yet</h3>
+      )
 
-    return <div>{body}</div>
+    return (
+      <div className="test__comment-list--body">
+        {body}
+        <CommentForm />
+      </div>
+    )
   }
 
   setListRef = (ref) => {

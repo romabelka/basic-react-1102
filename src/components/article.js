@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
 
 class Article extends Component {
-  /*
-    componentDidCatch(error) {
-        console.log('---', error)
-    }
-
-*/
   render() {
     const { article, isOpen, onBtnClick } = this.props
     return (
       <div>
         <h3>{article.title}</h3>
-        <button onClick={onBtnClick} className="test--article__btn">
+        <button onClick={onBtnClick} className="test__article--btn">
           {isOpen ? 'close' : 'open'}
         </button>
         {this.getBody()}
@@ -27,17 +20,11 @@ class Article extends Component {
     if (!isOpen) return null
 
     return (
-      <section className="test--article__body">
+      <section className="test__article--body">
         {article.text}
-        <CommentList comments={article.comments} ref={this.setCommentsRef} />
+        <CommentList comments={article.comments} />
       </section>
     )
-  }
-
-  setCommentsRef = (ref) => {
-    //      window.comments = ref
-    //    console.log('---', 'comments', ref)
-    //    console.log('---', 'comments DOM', findDOMNode(ref))
   }
 }
 
