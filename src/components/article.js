@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
+// import { findDOMNode } from 'react-dom'
 import CommentList from './comment-list'
 
 class Article extends Component {
@@ -13,7 +13,7 @@ class Article extends Component {
     const { article, isOpen, onBtnClick } = this.props
     return (
       <div>
-        <h3>{article.title}</h3>
+        <h3 className="test--article__title">{article.title}</h3>
         <button onClick={onBtnClick} className="test--article__btn">
           {isOpen ? 'close' : 'open'}
         </button>
@@ -28,8 +28,8 @@ class Article extends Component {
 
     return (
       <section className="test--article__body">
-        {article.text}
-        <CommentList comments={article.comments} ref={this.setCommentsRef} />
+        <p>{article.text}</p>
+        <CommentList />
       </section>
     )
   }
