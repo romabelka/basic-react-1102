@@ -34,8 +34,15 @@ class ArticleList extends Component {
   }
 
   render() {
-    const { articles, toggleOpenItem, openItemId } = this.props
-    const articleItems = articles.map((article) => (
+    const { selected, articles, toggleOpenItem, openItemId } = this.props
+    let filteredArticles = articles
+    if (selected.length !== 0) {
+      filteredArticles = articles.filter((article) =>
+        selected.map((select) => select.value).includes(article.id)
+      )
+      filteredArticles = filteredArticles.length ? filteredArticles : articles
+    }
+    const articleItems = filteredArticles.map((article) => (
       <li key={article.id}>
         <Article
           article={article}
@@ -57,6 +64,7 @@ ArticleList.propTypes = {
   openItemId: PropTypes.string
 }
 
-export default connect((state) => ({
-  articles: state.articles
+export default connect((storeState) => ({
+  articles: storeState.articles,
+  selected: storeState.selected
 }))(accordion(ArticleList))

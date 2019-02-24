@@ -8,7 +8,10 @@ function SelectFilter({ updateSelect, selected, articles }) {
     label: article.title,
     value: article.id
   }))
-  return <Select options={options} value={selected} onChange={updateSelect} isMulti />
+  const filteredSelect = selected.filter((select) =>
+    articles.map((article) => article.id).includes(select.value)
+  )
+  return <Select options={options} value={filteredSelect} onChange={updateSelect} isMulti />
 }
 
 const mapStateToProps = (storeState) => ({
