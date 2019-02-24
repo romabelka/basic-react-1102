@@ -28,7 +28,6 @@ class ArticleList extends Component {
 ArticleList.propTypes = {
   articles: PropTypes.array.isRequired,
   fetchAll: PropTypes.func,
-  //from toggleOpen decorator
   toggleOpenItem: PropTypes.func.isRequired,
   openItemId: PropTypes.string
 }
