@@ -57,6 +57,20 @@ ArticleList.propTypes = {
   openItemId: PropTypes.string
 }
 
-export default connect((state) => ({
-  articles: state.articles
-}))(accordion(ArticleList))
+export default connect((state) => {
+  const selectedArticleIds = state.filter.selectedArticles.map((item) => item.value)
+
+  const { dateFrom, dateTo } = state.filter
+
+  return {
+    articles: state.articles.filter((item) => {
+      const itemDate = Date.parse(item.date)
+
+      return (
+        selectedArticleIds.indexOf(item.id) !== -1 &&
+        (!dateFrom || itemDate >= dateFrom) &&
+        (!dateTo || itemDate <= dateTo)
+      )
+    })
+  }
+})(accordion(ArticleList))
