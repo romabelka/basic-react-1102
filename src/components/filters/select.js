@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import Select from 'react-select'
 
-function SelectFilter({ articles }) {
-  const [selected, setSelection] = useState(null)
+import { selectArticles } from '../../ac/index'
 
+function SelectFilter({ articles, selectArticles, selected }) {
   const options = articles.map((article) => ({
     label: article.title,
     value: article.id
   }))
 
-  return <Select options={options} value={selected} onChange={setSelection} isMulti />
+  return <Select options={options} value={selected} onChange={selectArticles} isMulti />
 }
 
-export default SelectFilter
+const mapStateToProps = (state) => ({
+  articles: state.articles,
+  selected: state.articlesFilter.selected
+})
+
+const mapDispatchToProps = {
+  selectArticles
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectFilter)

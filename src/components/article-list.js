@@ -57,6 +57,21 @@ ArticleList.propTypes = {
   openItemId: PropTypes.string
 }
 
+function filterArticles(articles, { range, selected }) {
+  let result = []
+  if (selected && selected.length) {
+    result = articles.filter((article) => selected.some((item) => article.id === item.value))
+  } else {
+    result = articles
+  }
+
+  if (range && range.from && range.to) {
+    result = result.filter((article) => article.date >= range.from && article.date <= range.to)
+  }
+
+  return result
+}
+
 export default connect((state) => ({
-  articles: state.articles
+  articles: filterArticles(state.articles, state.articlesFilter)
 }))(accordion(ArticleList))
