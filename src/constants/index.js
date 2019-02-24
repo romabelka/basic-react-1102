@@ -1,3 +1,9 @@
 export const INCREMENT = 'INCREMENT'
 
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
+
+export const SET_DATE_FROM = 'SET_DATE_FROM'
+
+export const SET_DATE_TO = 'SET_DATE_TO'
+
+export const SET_SELECTED_ARTICLES = 'SET_SELECTED_ARTICLES'
