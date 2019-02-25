@@ -28,8 +28,5 @@ export const createCommentSelector = () =>
   createSelector(
     commentsSelector,
     idSelector,
-    (comments, id) => {
-      console.log('---', 'commentSelector', id)
-      return comments.find((comment) => comment.id === id)
-    }
+    (comments, id) => comments[id]
   )
