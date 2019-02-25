@@ -58,13 +58,18 @@ ArticleList.propTypes = {
 }
 
 const mapStateToStore = (storeState) => {
-  const { articles, selected } = storeState
+  const { articles, selected, date } = storeState
   let filteredArticles = articles
   if (selected.length !== 0) {
-    filteredArticles = articles.filter((article) =>
+    filteredArticles = filteredArticles.filter((article) =>
       selected.map((select) => select.value).includes(article.id)
     )
     filteredArticles = filteredArticles.length ? filteredArticles : articles
+  }
+  if (date.from && date.to) {
+    filteredArticles = filteredArticles.filter(
+      (article) => new Date(article.date) < date.to && new Date(article.date) > date.from
+    )
   }
   return {
     articles: filteredArticles

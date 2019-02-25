@@ -6,9 +6,11 @@ import { deleteArticle } from '../ac'
 class Article extends Component {
   render() {
     const { article, isOpen, onBtnClick } = this.props
+    const date = new Date(article.date).toDateString()
     return (
       <div>
         <h3>{article.title}</h3>
+        <p>{date}</p>
         <button onClick={onBtnClick} className="test__article--btn">
           {isOpen ? 'close' : 'open'}
         </button>
