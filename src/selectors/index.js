@@ -9,7 +9,6 @@ export const filtratedArticlesSelector = createSelector(
   selectedSelector,
   dateRangeSelector,
   (articles, selected, dateRange) => {
-    console.log('---', 'filtratedArticlesSelector')
     const { from, to } = dateRange
 
     return articles.filter((article) => {
@@ -19,5 +18,17 @@ export const filtratedArticlesSelector = createSelector(
         (!from || !to || (published > from && published < to))
       )
     })
+  }
+)
+
+const commentsSelector = (state) => state.comments
+const idSelector = (_, props) => props.id
+
+export const commentSelector = createSelector(
+  commentsSelector,
+  idSelector,
+  (comments, id) => {
+    console.log('---', 'commentSelector', id)
+    return comments.find((comment) => comment.id === id)
   }
 )

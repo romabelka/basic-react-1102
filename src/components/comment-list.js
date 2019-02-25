@@ -37,9 +37,9 @@ export class CommentList extends Component {
     const body =
       comments && comments.length ? (
         <ul ref={this.setListRef}>
-          {comments.map((comment) => (
-            <li key={comment.id} className="test__comment-list--item">
-              <Comment comment={comment} />
+          {comments.map((id) => (
+            <li key={id} className="test__comment-list--item">
+              <Comment id={id} />
             </li>
           ))}
         </ul>
