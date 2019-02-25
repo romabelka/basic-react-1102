@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Article from './article'
 import accordion from '../decorators/accordion'
+import { filtratedArticlesSelector } from '../selectors'
 //import useAccordion from '../custom-hooks/accordion'
 
 /*
@@ -34,6 +35,7 @@ class ArticleList extends Component {
   }
 
   render() {
+    console.log('---', 'render ArticleList')
     const { articles, toggleOpenItem, openItemId } = this.props
     const articleItems = articles.map((article) => (
       <li key={article.id}>
@@ -58,19 +60,8 @@ ArticleList.propTypes = {
 }
 
 export default connect((state) => {
-  const {
-    selected,
-    dateRange: { from, to }
-  } = state.filters
-
-  const filtratedArticles = state.articles.filter((article) => {
-    const published = Date.parse(article.date)
-    return (
-      (!selected.length || selected.find((selected) => selected.value === article.id)) &&
-      (!from || !to || (published > from && published < to))
-    )
-  })
+  console.log('---', 'mapStateToProps')
   return {
-    articles: filtratedArticles
+    articles: filtratedArticlesSelector(state)
   }
 })(accordion(ArticleList))
