@@ -59,5 +59,5 @@ ArticleList.propTypes = {
 }
 
 export default connect((state) => ({
-  articles: filtratedArticlesSelector(state)
+  articles: Object.values(filtratedArticlesSelector(state))
 }))(accordion(ArticleList))

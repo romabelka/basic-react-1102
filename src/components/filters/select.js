@@ -16,7 +16,7 @@ function SelectFilter({ articles, selected, changeSelection }) {
 export default connect(
   (state) => ({
     selected: selectedSelector(state),
-    articles: articlesSelector(state)
+    articles: Object.values(articlesSelector(state))
   }),
   { changeSelection }
 )(SelectFilter)
