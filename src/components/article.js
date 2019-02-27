@@ -29,7 +29,7 @@ class Article extends Component {
     return (
       <section className="test__article--body">
         {article.text}
-        <CommentList comments={article.comments} />
+        <CommentList comments={article.comments} articleId={article.id} />
       </section>
     )
   }

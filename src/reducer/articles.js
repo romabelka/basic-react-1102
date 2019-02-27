@@ -1,5 +1,5 @@
 import { normalizedArticles } from '../fixtures'
-import { DELETE_ARTICLE } from '../constants'
+import { DELETE_ARTICLE, ADD_COMMENT } from '../constants'
 
 const defaultArticles = normalizedArticles.reduce(
   (acc, article) => ({
@@ -16,6 +16,16 @@ export default (articlesState = defaultArticles, action) => {
       const copy = { ...articlesState }
       delete copy[payload.id]
       return copy
+    case ADD_COMMENT:
+      const { articleId, newId } = payload
+      const article = articlesState[articleId]
+      return {
+        ...articlesState,
+        [articleId]: {
+          ...article,
+          comments: [...(article.comments || []), newId]
+        }
+      }
     default:
       return articlesState
   }
