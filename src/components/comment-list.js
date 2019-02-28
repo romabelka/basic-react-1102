@@ -6,7 +6,7 @@ import CommentForm from './comment-form'
 
 export class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array,
+    article: PropTypes.object,
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func
   }
@@ -31,7 +31,10 @@ export class CommentList extends Component {
   }
 
   getBody() {
-    const { comments, isOpen } = this.props
+    const {
+      article: { comments, id },
+      isOpen
+    } = this.props
     if (!isOpen) return null
 
     const body =
@@ -50,7 +53,7 @@ export class CommentList extends Component {
     return (
       <div className="test__comment-list--body">
         {body}
-        <CommentForm />
+        <CommentForm articleId={id} />
       </div>
     )
   }
