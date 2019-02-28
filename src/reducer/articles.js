@@ -1,9 +1,17 @@
 import { DELETE_ARTICLE, ADD_COMMENT } from '../constants'
-import { Map, fromJS } from 'immutable'
+import { Record } from 'immutable'
 import { normalizedArticles as defaultArticles } from '../fixtures'
 import { arrToMap } from './utils'
 
-export default (articles = fromJS(arrToMap(defaultArticles)), action) => {
+const ArticleRecord = Record({
+  id: null,
+  title: null,
+  text: null,
+  date: null,
+  comments: []
+})
+
+export default (articles = arrToMap(defaultArticles, ArticleRecord), action) => {
   const { type, payload, randomId } = action
 
   switch (type) {
@@ -12,7 +20,7 @@ export default (articles = fromJS(arrToMap(defaultArticles)), action) => {
 
     case ADD_COMMENT:
       return articles.updateIn([payload.articleId, 'comments'], (comments) =>
-        comments.push(randomId)
+        comments.concat(randomId)
       )
 
     default:
