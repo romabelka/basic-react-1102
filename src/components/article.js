@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CommentList from './comment-list'
-import { deleteArticle } from '../ac'
+import { deleteArticle, loadArticle } from '../ac'
+import Loader from './common/loader'
 
 class Article extends Component {
+  componentDidUpdate(prevProps) {
+    const { isOpen, article, loadArticle } = this.props
+    if (!prevProps.isOpen && isOpen && !article.text && !article.loading) {
+      loadArticle(article.id)
+    }
+  }
+
   render() {
     const { article, isOpen, onBtnClick } = this.props
     return (
@@ -25,6 +33,7 @@ class Article extends Component {
   getBody() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
+    if (article.loading) return <Loader />
 
     return (
       <section className="test__article--body">
@@ -37,5 +46,5 @@ class Article extends Component {
 
 export default connect(
   null,
-  { deleteArticle }
+  { deleteArticle, loadArticle }
 )(Article)
