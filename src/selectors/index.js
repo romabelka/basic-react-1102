@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-export const articleListSelector = (state) => Object.values(state.articles)
+export const articleListSelector = (state) => state.articles.valueSeq().toJS()
 export const selectedSelector = (state) => state.filters.selected
 export const dateRangeSelector = (state) => state.filters.dateRange
 
