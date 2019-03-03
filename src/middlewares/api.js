@@ -5,6 +5,8 @@ export default (store) => (next) => async (action) => {
 
   if (!callAPI) return next(action)
 
+  console.log(action)
+
   next({
     ...rest,
     type: type + START

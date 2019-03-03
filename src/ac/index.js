@@ -4,10 +4,12 @@ import {
   CHANGE_DATE_RANGE,
   CHANGE_SELECTION,
   ADD_COMMENT,
+  LOAD_COMMENTS,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
   START,
-  SUCCESS
+  SUCCESS,
+  FAIL
 } from '../constants'
 
 export function increment() {
@@ -77,5 +79,38 @@ export function loadArticle(id) {
       payload: { id },
       response
     })
+  }
+}
+
+export function loadComments(articleId) {
+  return (dispatch) => {
+    dispatch({
+      type: LOAD_COMMENTS + START,
+      payload: {
+        articleId
+      }
+    })
+
+    fetch(`/api/comment?article=${articleId}`)
+      .then((rawRes) => rawRes.json())
+      .then((response) => {
+        console.log(response)
+        dispatch({
+          type: LOAD_COMMENTS + SUCCESS,
+          payload: {
+            articleId,
+            response
+          }
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: LOAD_COMMENTS + FAIL,
+          payload: {
+            articleId,
+            error
+          }
+        })
+      })
   }
 }
