@@ -21,14 +21,16 @@ export const filtratedArticlesSelector = createSelector(
   }
 )
 
-const commentsSelector = (state) => state.comments
+const commentsSelector = (state) => state.comments.entities
 const idSelector = (_, props) => props.id
 
 export const createCommentSelector = () =>
   createSelector(
     commentsSelector,
     idSelector,
-    (comments, id) => comments.get(id)
+    (comments, id) => {
+      return comments.get(id)
+    }
   )
 
 export const articlesLoadingSelector = (state) => state.articles.loading
