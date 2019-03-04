@@ -35,6 +35,7 @@ class App extends Component {
           <Route path="/filters" component={Filters} />
           <Route path="/articles/new" render={() => <h1>New article form</h1>} />
           <Route path="/articles" component={ArticlesRoute} />
+          <Route path="/" render={() => <h1>Not Found Page</h1>} />
         </Switch>
       </div>
     )
