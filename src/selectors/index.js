@@ -32,3 +32,4 @@ export const createCommentSelector = () =>
   )
 
 export const articlesLoadingSelector = (state) => state.articles.loading
+export const articlesLoadedSelector = (state) => state.articles.loaded

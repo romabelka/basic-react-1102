@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Article from './article'
 import accordion from '../decorators/accordion'
-import { articlesLoadingSelector, filtratedArticlesSelector } from '../selectors'
+import {
+  articlesLoadedSelector,
+  articlesLoadingSelector,
+  filtratedArticlesSelector
+} from '../selectors'
 import { loadAllArticles } from '../ac'
 import Loader from './common/loader'
 //import useAccordion from '../custom-hooks/accordion'
@@ -33,7 +37,8 @@ export default function ArticleList({ articles, fetchAll }) {
 
 class ArticleList extends Component {
   componentDidMount() {
-    this.props.fetchAll && this.props.fetchAll()
+    const { loading, loaded, fetchAll } = this.props
+    fetchAll && !loading && !loaded && fetchAll()
   }
 
   render() {
@@ -66,7 +71,8 @@ ArticleList.propTypes = {
 export default connect(
   (state) => ({
     articles: filtratedArticlesSelector(state),
-    loading: articlesLoadingSelector(state)
+    loading: articlesLoadingSelector(state),
+    loaded: articlesLoadedSelector(state)
   }),
   { fetchAll: loadAllArticles }
 )(accordion(ArticleList))
