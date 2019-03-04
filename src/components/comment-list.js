@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Comment from './comment'
-import toggleOpen from '../decorators/toggle-open'
 import CommentForm from './comment-form'
+import toggleOpen from '../decorators/toggle-open'
+import { connect } from 'react-redux'
+import { loadArticleComments } from '../ac'
+import Loader from './common/loader'
 
-export class CommentList extends Component {
+class CommentList extends Component {
   static propTypes = {
     article: PropTypes.object,
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func
   }
 
-  /*
-  static defaultProps = {
-    comments: []
+  componentDidUpdate(oldProps) {
+    const { isOpen, article, loadArticleComments } = this.props
+    if (isOpen && !oldProps.isOpen && !article.commentsLoading && !article.commentsLoaded) {
+      loadArticleComments(article.id)
+    }
   }
-*/
 
   render() {
     const { isOpen, toggleOpen } = this.props
@@ -32,23 +36,24 @@ export class CommentList extends Component {
 
   getBody() {
     const {
-      article: { comments, id },
+      article: { comments, id, commentsLoading, commentsLoaded },
       isOpen
     } = this.props
     if (!isOpen) return null
+    if (commentsLoading) return <Loader />
+    if (!commentsLoaded) return null
 
-    const body =
-      comments && comments.length ? (
-        <ul ref={this.setListRef}>
-          {comments.map((id) => (
-            <li key={id} className="test__comment-list--item">
-              <Comment id={id} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <h3 className="test__comment-list--empty">No comments yet</h3>
-      )
+    const body = comments.length ? (
+      <ul className="test__comment-list--body">
+        {comments.map((id) => (
+          <li key={id} className="test__comment-list--item">
+            <Comment id={id} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <h3 className="test__comment-list--empty">No comments yet</h3>
+    )
 
     return (
       <div className="test__comment-list--body">
@@ -57,16 +62,9 @@ export class CommentList extends Component {
       </div>
     )
   }
-
-  setListRef = (ref) => {
-    this.list = ref
-  }
 }
-/*
 
-CommentList.propTypes = {
-  comments: PropTypes.array
-}
-*/
-
-export default toggleOpen(CommentList)
+export default connect(
+  null,
+  { loadArticleComments }
+)(toggleOpen(CommentList))
