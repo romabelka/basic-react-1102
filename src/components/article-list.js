@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Article from './article'
-import accordion from '../decorators/accordion'
 import {
   articlesLoadedSelector,
   articlesLoadingSelector,
@@ -10,6 +8,7 @@ import {
 } from '../selectors'
 import { loadAllArticles } from '../ac'
 import Loader from './common/loader'
+import { NavLink } from 'react-router-dom'
 //import useAccordion from '../custom-hooks/accordion'
 
 /*
@@ -42,17 +41,15 @@ class ArticleList extends Component {
   }
 
   render() {
-    const { articles, toggleOpenItem, openItemId, loading } = this.props
+    const { articles, loading } = this.props
 
     if (loading) return <Loader />
 
     const articleItems = articles.map((article) => (
       <li key={article.id}>
-        <Article
-          article={article}
-          onBtnClick={toggleOpenItem(article.id)}
-          isOpen={article.id === openItemId}
-        />
+        <NavLink to={`/articles/${article.id}`} activeStyle={{ color: 'red' }}>
+          {article.title}
+        </NavLink>
       </li>
     ))
 
@@ -75,4 +72,4 @@ export default connect(
     loaded: articlesLoadedSelector(state)
   }),
   { fetchAll: loadAllArticles }
-)(accordion(ArticleList))
+)(ArticleList)

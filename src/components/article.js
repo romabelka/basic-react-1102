@@ -3,17 +3,19 @@ import { connect } from 'react-redux'
 import CommentList from './comment-list'
 import { deleteArticle, loadArticle } from '../ac'
 import Loader from './common/loader'
+import { articleSelector } from '../selectors'
 
 class Article extends Component {
   componentDidUpdate(prevProps) {
-    const { isOpen, article, loadArticle } = this.props
-    if (!prevProps.isOpen && isOpen && !article.text && !article.loading) {
-      loadArticle(article.id)
+    const { id, article, loadArticle } = this.props
+    if (!article || !(article.text && !article.loading)) {
+      loadArticle(id)
     }
   }
 
   render() {
     const { article, isOpen, onBtnClick } = this.props
+    if (!article) return null
     return (
       <div>
         <h3>{article.title}</h3>
@@ -45,6 +47,8 @@ class Article extends Component {
 }
 
 export default connect(
-  null,
+  (state, props) => ({
+    article: articleSelector(state, props)
+  }),
   { deleteArticle, loadArticle }
 )(Article)
