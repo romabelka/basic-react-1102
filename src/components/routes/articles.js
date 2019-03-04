@@ -7,15 +7,13 @@ function ArticlesRoute() {
   return (
     <div>
       <ArticleList />
-      <Route path="/articles/:id" render={getArticle} />
+      <Route path="/articles/:id" children={getArticle} />
     </div>
   )
 }
 
-const getArticle = ({ match }) => {
-  const { id } = match.params
-  return <Article id={id} isOpen />
-}
+const getArticle = ({ match }) =>
+  match ? <Article id={match.params.id} isOpen /> : <h1>Select an article</h1>
 
 ArticlesRoute.propTypes = {}
 
