@@ -14,7 +14,7 @@ function ArticlesRoute() {
 
 const getArticle = ({ match }) => {
   const { id } = match.params
-  return <Article id={id} isOpen />
+  return <Article id={id} isOpen key={id} />
 }
 
 ArticlesRoute.propTypes = {}

@@ -6,11 +6,24 @@ import Loader from './common/loader'
 import { articleSelector } from '../selectors'
 
 class Article extends Component {
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
     const { id, article, loadArticle } = this.props
     if (!article || !(article.text && !article.loading)) {
       loadArticle(id)
     }
+  }
+
+  /*
+  componentDidUpdate() {
+    const { id, article, loadArticle } = this.props
+    if (!article || !(article.text && !article.loading)) {
+      loadArticle(id)
+    }
+  }
+*/
+
+  componentWillUnmount() {
+    //cleanup
   }
 
   render() {
