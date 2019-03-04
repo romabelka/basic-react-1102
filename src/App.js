@@ -31,7 +31,7 @@ class App extends Component {
         </div>
         <UserForm />
         <Switch>
-          <Route path="/counter" component={Counter} />
+          <Route path="/counter" component={Counter} exact />
           <Route path="/filters" component={Filters} />
           <Route path="/articles/new" render={() => <h1>New article form</h1>} />
           <Route path="/articles" component={ArticlesRoute} />
