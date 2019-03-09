@@ -8,7 +8,8 @@ import {
   LOAD_ARTICLE,
   START,
   SUCCESS,
-  LOAD_ARTICLE_COMMENTS
+  LOAD_ARTICLE_COMMENTS,
+  LOAD_ALL_COMMENTS
 } from '../constants'
 
 export function increment() {
@@ -86,5 +87,21 @@ export function loadArticleComments(articleId) {
     type: LOAD_ARTICLE_COMMENTS,
     payload: { articleId },
     callAPI: `/api/comment?article=${articleId}`
+  }
+}
+
+export function loadAllComments() {
+  return async (dispatch) => {
+    dispatch({
+      type: LOAD_ALL_COMMENTS + START
+    })
+
+    const rawRes = await fetch(`/api/comment`)
+    const response = await rawRes.json()
+
+    dispatch({
+      type: LOAD_ALL_COMMENTS + SUCCESS,
+      response
+    })
   }
 }
