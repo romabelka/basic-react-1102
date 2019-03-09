@@ -1,41 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PaginationComment from '../pagination-comment'
+import { NavLink, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loadAllComments } from '../../ac'
-import Loader from '../common/loader'
-import { commentsSelector, commentsLoadingSelector, commentsLoadedSelector } from '../../selectors'
-import Comment from '../comment'
+import { commentsTotalSelector } from '../../selectors'
 
-class CommentsRoute extends Component {
-  componentDidMount() {
-    const { loading, loaded, fetchAll } = this.props
-    fetchAll && !loading && !loaded && fetchAll()
-  }
-
-  render() {
-    const { loading, comments } = this.props
-    if (loading) return <Loader />
-
-    const [...keys] = comments.keys()
-    if (!keys.length) return <p>No comments</p>
-
-    const commentList = (
-      <ul>
-        {keys.map((id) => (
-          <li key={id}>
-            <Comment id={id} />
-          </li>
-        ))}
-      </ul>
+function CommentRoute({ total }) {
+  const pageCount = Math.ceil(total / 5)
+  let navLink = []
+  for (let i = 1; i <= pageCount; i++) {
+    navLink.push(
+      <NavLink key={i} to={`/comments/page/${i}`} activeStyle={{ color: 'red' }}>
+        {i}
+      </NavLink>
     )
-    return <div>{commentList}</div>
   }
+  return (
+    <div>
+      {navLink}
+      <Route path="/comments/page/:id" children={getFiveComment} />
+    </div>
+  )
+}
+
+const getFiveComment = ({ match }) => {
+  return match ? <PaginationComment page={match.params.id} /> : <div>No comments</div>
 }
 
 export default connect(
-  (state) => ({
-    comments: commentsSelector(state),
-    loading: commentsLoadingSelector(state),
-    loaded: commentsLoadedSelector(state)
-  }),
-  { fetchAll: loadAllComments }
-)(CommentsRoute)
+  (state) => ({ total: commentsTotalSelector(state) }),
+  null
+)(CommentRoute)

@@ -1,17 +1,26 @@
-import { ADD_COMMENT, LOAD_ALL_COMMENTS, LOAD_ARTICLE_COMMENTS, START, SUCCESS } from '../constants'
-import { Record, OrderedMap } from 'immutable'
-import { arrToMap } from './utils'
+import {
+  ADD_COMMENT,
+  LOAD_FIVE_COMMENTS,
+  LOAD_ARTICLE_COMMENTS,
+  START,
+  SUCCESS
+} from '../constants'
+import { Record, OrderedMap, List } from 'immutable'
+import { arrToMap, paginationArrToMap } from './utils'
 
 const CommentRecord = Record({
   id: null,
   text: null,
-  user: null
+  user: null,
+  page: null
 })
 
 const ReducerRecord = Record({
   entities: new OrderedMap({}),
   loading: false,
-  loaded: false
+  loaded: false,
+  total: 0,
+  pagesLoaded: List([])
 })
 
 export default (state = new ReducerRecord(), action) => {
@@ -27,14 +36,16 @@ export default (state = new ReducerRecord(), action) => {
         })
       )
 
-    case LOAD_ALL_COMMENTS + START:
+    case LOAD_FIVE_COMMENTS + START:
       return state.set('loading', true)
 
-    case LOAD_ALL_COMMENTS + SUCCESS:
+    case LOAD_FIVE_COMMENTS + SUCCESS:
       return state
-        .mergeIn(['entities'], arrToMap(response.records, CommentRecord))
+        .mergeIn(['entities'], paginationArrToMap(response.records, CommentRecord, payload.page))
         .set('loading', false)
         .set('loaded', true)
+        .set('total', response.total)
+        .update('pagesLoaded', (arr) => arr.push(payload.page))
 
     case LOAD_ARTICLE_COMMENTS + SUCCESS:
       return state.mergeIn(['entities'], arrToMap(response, CommentRecord))

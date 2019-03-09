@@ -4,7 +4,7 @@ import ArticlesRoute from './components/routes/articles'
 import Filters from './components/filters'
 import UserForm from './components/user-form'
 import Counter from './components/counter'
-import CommentsRoute from './components/routes/comments'
+import CommentRoute from './components/routes/comments'
 
 class App extends Component {
   render() {
@@ -30,7 +30,7 @@ class App extends Component {
             </div>
             <div>
               <NavLink to="/comments/page" activeStyle={{ color: 'red' }}>
-                All Comments
+                Comments Page
               </NavLink>
             </div>
           </div>
@@ -41,7 +41,7 @@ class App extends Component {
           <Route path="/filters" component={Filters} />
           <Route path="/articles/new" render={() => <h1>New article form</h1>} />
           <Route path="/articles" component={ArticlesRoute} />
-          <Route path="/comments/page" component={CommentsRoute} />
+          <Route path="/comments/page" component={CommentRoute} />
           <Route path="/" render={() => <h1>Not Found Page</h1>} />
         </Switch>
       </div>
