@@ -4,6 +4,8 @@ import { NavLink, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { commentsTotalSelector } from '../../selectors'
 
+const DEFAULT_LOAD_PAGE = 1
+
 function CommentRoute({ total }) {
   const pageCount = Math.ceil(total / 5)
   let navLink = []
@@ -23,7 +25,11 @@ function CommentRoute({ total }) {
 }
 
 const getFiveComment = ({ match }) => {
-  return match ? <PaginationComment page={match.params.id} /> : <div>No comments</div>
+  return match ? (
+    <PaginationComment page={match.params.id} />
+  ) : (
+    <PaginationComment page={DEFAULT_LOAD_PAGE} />
+  )
 }
 
 export default connect(
