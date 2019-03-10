@@ -7,9 +7,5 @@ export const itemsCountSelector = (state) => state.allComments.itemsCount
 export const commentsByPageSelector = createSelector(
   commentsByPageCommonSelector,
   pageSelector,
-  (commentsByPage, page) => {
-    console.log(commentsByPage)
-    console.log(page)
-    return commentsByPage.get(page)
-  }
+  (commentsByPage, page) => commentsByPage.get(page)
 )
