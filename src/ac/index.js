@@ -1,15 +1,16 @@
 import {
-  INCREMENT,
-  DELETE_ARTICLE,
+  ADD_COMMENT,
   CHANGE_DATE_RANGE,
   CHANGE_SELECTION,
-  ADD_COMMENT,
+  DELETE_ARTICLE,
+  INCREMENT,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
+  LOAD_ARTICLE_COMMENTS,
   START,
-  SUCCESS,
-  LOAD_ARTICLE_COMMENTS
+  SUCCESS
 } from '../constants'
+import { LOAD_COMMENTS } from '../constants/index'
 
 export function increment() {
   return {
@@ -86,5 +87,23 @@ export function loadArticleComments(articleId) {
     type: LOAD_ARTICLE_COMMENTS,
     payload: { articleId },
     callAPI: `/api/comment?article=${articleId}`
+  }
+}
+
+export function loadComments(page) {
+  return async (dispatch) => {
+    dispatch({
+      type: LOAD_COMMENTS + START,
+      payload: { page }
+    })
+
+    const rawRes = await fetch(`/api/comment/?limit=5&offset=${(page - 1) * 5}`)
+    const response = await rawRes.json()
+
+    dispatch({
+      type: LOAD_COMMENTS + SUCCESS,
+      payload: { page },
+      response
+    })
   }
 }
