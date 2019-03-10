@@ -91,6 +91,7 @@ export function loadArticleComments(articleId) {
 }
 
 export function loadComments(page) {
+  page = +page
   return async (dispatch) => {
     dispatch({
       type: LOAD_COMMENTS + START,

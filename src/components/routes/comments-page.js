@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import CommentsNavigation from '../comments-navigation'
 import CommentsPageList from '../comments-page-list'
 
+import { itemsCountSelector } from '../../selectors/comments'
+
 function CommentsPage({ match, hasNext }) {
   const page = match.params.page || 1
   return (
@@ -14,10 +16,10 @@ function CommentsPage({ match, hasNext }) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const totalPagesCount = Math.ceil(state.allComments.itemsCount / 5)
+  const totalPagesCount = Math.ceil(itemsCountSelector(state) / 5)
 
   return {
-    hasNext: totalPagesCount > +ownProps.match.params.page
+    hasNext: totalPagesCount > (+ownProps.match.params.page || 1)
   }
 }
 

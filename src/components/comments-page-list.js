@@ -1,42 +1,40 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { loadComments } from '../ac/index'
 
-class CommentsPageList extends Component {
-  componentDidMount() {
-    const { page, loadComments } = this.props
-    loadComments(page)
+import { commentsByPageSelector } from '../selectors/comments'
+
+function CommentsPageList(props) {
+  useCheckAndFetch(props)
+
+  const { items } = props
+
+  if (!items) {
+    return null
   }
 
-  componentDidUpdate(oldProps) {
-    const { page, loadComments } = this.props
+  return items.map((model) => {
+    return (
+      <p>
+        {model.text} <br />
+        <b>by {model.user}</b>
+      </p>
+    )
+  })
+}
 
-    if (page !== oldProps.page) {
+function useCheckAndFetch(props) {
+  useEffect(() => {
+    const { items, page, loadComments } = props
+    if (!items) {
       loadComments(page)
     }
-  }
-
-  render() {
-    const { items } = this.props
-
-    if (!items) {
-      return null
-    }
-
-    return items.map((model) => {
-      return (
-        <p>
-          {model.text} <br />
-          <b>by {model.user}</b>
-        </p>
-      )
-    })
-  }
+  }, [props.page])
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.allComments.entities.get(ownProps.page)
+    items: commentsByPageSelector(state, ownProps)
   }
 }
 
