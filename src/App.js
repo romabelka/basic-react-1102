@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, NavLink, Switch } from 'react-router-dom'
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import ArticlesRoute from './components/routes/articles'
 import Filters from './components/filters'
 import UserForm from './components/user-form'
@@ -29,7 +29,7 @@ class App extends Component {
               </NavLink>
             </div>
             <div>
-              <NavLink to="/comments/1" activeStyle={{ color: 'red' }}>
+              <NavLink to="/comments" activeStyle={{ color: 'red' }}>
                 Comments
               </NavLink>
             </div>
@@ -37,6 +37,7 @@ class App extends Component {
         </div>
         <UserForm />
         <Switch>
+          <Redirect from="/" exact to="/articles" />
           <Route path="/counter" component={Counter} exact />
           <Route path="/filters" component={Filters} />
           <Route path="/articles/new" render={() => <h1>New article form</h1>} />
