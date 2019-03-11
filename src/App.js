@@ -1,40 +1,23 @@
 import React, { Component } from 'react'
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import ArticlesRoute from './components/routes/articles'
 import Filters from './components/filters'
 import UserForm from './components/user-form'
 import Counter from './components/counter'
 import CommentsRoute from './components/routes/comments'
+import MainMenu, { MenuItem } from './components/main-menu'
 
 class App extends Component {
   render() {
     return (
       <div>
         <h1>Article App</h1>
-        <div>
-          <div>
-            <div>
-              <NavLink to="/articles" activeStyle={{ color: 'red' }}>
-                Articles
-              </NavLink>
-            </div>
-            <div>
-              <NavLink to="/filters" activeStyle={{ color: 'red' }}>
-                Filters
-              </NavLink>
-            </div>
-            <div>
-              <NavLink to="/counter" activeStyle={{ color: 'red' }}>
-                Counter
-              </NavLink>
-            </div>
-            <div>
-              <NavLink to="/comments" activeStyle={{ color: 'red' }}>
-                Comments
-              </NavLink>
-            </div>
-          </div>
-        </div>
+        <MainMenu>
+          <MenuItem link="/articles">Articles</MenuItem>
+          <MenuItem link="/filters">Filters</MenuItem>
+          <MenuItem link="/counter">Counter</MenuItem>
+          <MenuItem link="/comments">Comments</MenuItem>
+        </MainMenu>
         <UserForm />
         <Switch>
           <Redirect from="/" exact to="/articles" />

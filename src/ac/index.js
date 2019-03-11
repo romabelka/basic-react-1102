@@ -13,7 +13,6 @@ import {
   LOAD_COMMENTS_FOR_PAGE,
   FAIL
 } from '../constants'
-import history from '../history'
 
 export function increment() {
   return {
