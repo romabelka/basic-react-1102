@@ -43,6 +43,7 @@ class App extends Component {
           <Route path="/articles/new" render={() => <h1>New article form</h1>} />
           <Route path="/articles" component={ArticlesRoute} />
           <Route path="/comments" component={CommentsRoute} />
+          <Route path="/error" render={() => <h1>Error Page</h1>} />
           <Route path="/" render={() => <h1>Not Found Page</h1>} />
         </Switch>
       </div>

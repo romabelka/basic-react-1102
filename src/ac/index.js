@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router'
 import {
   INCREMENT,
   DELETE_ARTICLE,
@@ -75,7 +76,7 @@ export function loadArticle(id) {
 
     const rawRes = await fetch(`/api/article/${id}`)
     if (rawRes.status >= 400) {
-      history.push('/error')
+      dispatch(push('/error'))
 
       return dispatch({
         type: LOAD_ARTICLE + FAIL,
