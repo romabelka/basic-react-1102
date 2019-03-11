@@ -9,8 +9,10 @@ import {
   START,
   SUCCESS,
   LOAD_ARTICLE_COMMENTS,
-  LOAD_COMMENTS_FOR_PAGE
+  LOAD_COMMENTS_FOR_PAGE,
+  FAIL
 } from '../constants'
+import history from '../history'
 
 export function increment() {
   return {
@@ -72,6 +74,15 @@ export function loadArticle(id) {
     })
 
     const rawRes = await fetch(`/api/article/${id}`)
+    if (rawRes.status >= 400) {
+      history.push('/error')
+
+      return dispatch({
+        type: LOAD_ARTICLE + FAIL,
+        error: rawRes.statusText
+      })
+    }
+
     const response = await rawRes.json()
 
     dispatch({
