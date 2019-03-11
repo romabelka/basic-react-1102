@@ -1,24 +1,17 @@
 import React, { Component } from 'react'
 
 class UserForm extends Component {
-  state = {
-    username: ''
-  }
-
   render() {
+    const { value } = this.props
     return (
       <div>
-        Username: <input value={this.state.username} onChange={this.handleChange} />
+        Username: <input value={value} onChange={this.handleChange} />
       </div>
     )
   }
 
   handleChange = (ev) => {
-    this.setState({
-      username: ev.target.value.length < 10 ? ev.target.value : ''
-    })
-
-    this.props.onStateChange(this.state)
+    this.props.onChange(ev.target.value)
   }
 }
 
