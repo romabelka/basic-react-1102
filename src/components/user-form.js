@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { Consumer as LanguageConsumer } from '../contexts/language-context'
 
 class UserForm extends Component {
   render() {
     const { value } = this.props
     return (
       <div>
-        Username: <input value={value} onChange={this.handleChange} />
+        <LanguageConsumer>
+          {(language, dict) => <span>{language === 'EN' ? 'Username' : 'Пользователь'}</span>}
+        </LanguageConsumer>
+        <input value={value} onChange={this.handleChange} />
       </div>
     )
   }
