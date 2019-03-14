@@ -30,7 +30,7 @@ function useCheckAndFetch(props) {
     }
 
     //    return () => unsubscribe(id)
-  }, [props.id])
+  }, [props.id, props.article])
 }
 
 function getBody(props) {
