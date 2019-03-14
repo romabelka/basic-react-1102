@@ -4,19 +4,17 @@ import CommentList from './comment-list'
 import { deleteArticle, loadArticle } from '../ac'
 import Loader from './common/loader'
 import { articleSelector } from '../selectors'
+import i18n from './i18n'
 
 function Article(props) {
   useCheckAndFetch(props)
 
-  const { article, isOpen, onBtnClick, deleteArticle } = props
+  const { article, deleteArticle, t } = props
   if (!article) return null
   return (
     <div>
       <h3>{article.title}</h3>
-      <button onClick={onBtnClick} className="test__article--btn">
-        {isOpen ? 'close' : 'open'}
-      </button>
-      <button onClick={deleteArticle}>delete me</button>
+      <button onClick={deleteArticle}>{t('delete me')}</button>
       {getBody(props)}
     </div>
   )
@@ -46,12 +44,14 @@ function getBody(props) {
   )
 }
 
-export default connect(
-  (state, props) => ({
-    article: articleSelector(state, props)
-  }),
-  (dispatch, props) => ({
-    deleteArticle: () => deleteArticle(props.article.id),
-    loadArticle: (...args) => dispatch(loadArticle(...args))
-  })
-)(Article)
+export default i18n(
+  connect(
+    (state, props) => ({
+      article: articleSelector(state, props)
+    }),
+    (dispatch, props) => ({
+      deleteArticle: () => deleteArticle(props.article.id),
+      loadArticle: (...args) => dispatch(loadArticle(...args))
+    })
+  )(Article)
+)
